@@ -15,7 +15,7 @@ public class Exercise2 {
     // NO DEBES MODIFICAR PARA NADA ESTA CLASE
 
     @Test
-    public void testTrianguloDescription(){
+    public void testTrianguloDescription() {
         // Given:
         Triangulo triangulo = new Triangulo();
 
