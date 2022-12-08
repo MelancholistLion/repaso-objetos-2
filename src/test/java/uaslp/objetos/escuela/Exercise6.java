@@ -1,8 +1,10 @@
 package uaslp.objetos.escuela;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
+import static org.mockito.Mockito.*;
 
 import org.junit.jupiter.api.Test;
+import org.mockito.Mockito;
 
 public class Exercise6 {
 
@@ -18,6 +20,50 @@ public class Exercise6 {
     modificar el test existente "validarInterfacesCreadas"
 
      */
+
+    @Test
+    public void AEqualsB() {
+        Dependencia1 dependencia1 = Mockito.mock(Dependencia1.class);
+        Dependencia2 dependencia2 = Mockito.mock(Dependencia2.class);
+        Dependencia3 dependencia3 = Mockito.mock(Dependencia3.class);
+        AlgoritmoX algoritmoX = new AlgoritmoX(dependencia1, dependencia2, dependencia3);
+
+
+        algoritmoX.algoritmoACubrir(27, 27, "A = B");
+
+        Mockito.verify(dependencia1).save("A = B");
+        Mockito.verify(dependencia3).recover();
+        verifyNoMoreInteractions(dependencia1, dependencia2, dependencia3);
+    }
+    @Test
+    public void AMoreThanB() {
+        Dependencia1 dependencia1 = Mockito.mock(Dependencia1.class);
+        Dependencia2 dependencia2 = Mockito.mock(Dependencia2.class);
+        Dependencia3 dependencia3 = Mockito.mock(Dependencia3.class);
+        AlgoritmoX algoritmoX = new AlgoritmoX(dependencia1, dependencia2, dependencia3);
+
+        algoritmoX.algoritmoACubrir(72, 27, "A > B");
+
+        Mockito.verify(dependencia1).save("A > B");
+        Mockito.verify(dependencia3).recover();
+        verifyNoMoreInteractions(dependencia1, dependencia2, dependencia3);
+    }
+
+    @Test
+    public void ALessThanB() {
+        Dependencia1 dependencia1 = Mockito.mock(Dependencia1.class);
+        Dependencia2 dependencia2 = Mockito.mock(Dependencia2.class);
+        Dependencia3 dependencia3 = Mockito.mock(Dependencia3.class);
+        AlgoritmoX algoritmoX = new AlgoritmoX(dependencia1, dependencia2, dependencia3);
+
+        algoritmoX.algoritmoACubrir(27, 72, "A < B");
+
+        Mockito.verify(dependencia1).save("A < B");
+        Mockito.verify(dependencia3).recover();
+        verifyNoMoreInteractions(dependencia1, dependencia2, dependencia3);
+    }
+
+
 
     @Test
     public void validarInterfacesCreadas(){
